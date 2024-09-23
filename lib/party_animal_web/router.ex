@@ -21,8 +21,12 @@ defmodule PartyAnimalWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    resources "/events", EventController
+  end
 
+  scope "/", PartyAnimalWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    resources "/events", EventController
   end
 
   # Other scopes may use custom stacks.
