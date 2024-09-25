@@ -15,6 +15,10 @@ defmodule PartyAnimalWeb.EventController do
   end
 
   def create(conn, %{"event" => event_params}) do
+    IO.inspect {:event_params, event_params}
+
+    event_params = Map.put(event_params, "user_id", conn.assigns[:current_user].id)
+
     case Events.create_event(event_params) do
       {:ok, event} ->
         conn

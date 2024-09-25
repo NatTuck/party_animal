@@ -3,6 +3,10 @@
   <:subtitle>Use this form to manage event records in your database.</:subtitle>
 </.header>
 
+<br/><br/>
+
+<p>Creating event for: <%= @current_user.email %></p>
+
 <.event_form changeset={@changeset} action={~p"/events"} />
 
 <.back navigate={~p"/events"}>Back to events</.back>

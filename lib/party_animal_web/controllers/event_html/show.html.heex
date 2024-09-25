@@ -12,6 +12,7 @@
   <:item title="Name"><%= @event.name %></:item>
   <:item title="When"><%= @event.when %></:item>
   <:item title="Desc"><%= @event.desc %></:item>
+  <:item title="Owner"><%= @event.user.email %></:item>
 </.list>
 
 <.back navigate={~p"/events"}>Back to events</.back>
