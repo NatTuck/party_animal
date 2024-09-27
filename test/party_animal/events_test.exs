@@ -2,12 +2,12 @@ defmodule PartyAnimal.EventsTest do
   use PartyAnimal.DataCase
 
   alias PartyAnimal.Events
+  alias PartyAnimal.Events.Event
+
+  import PartyAnimal.EventsFixtures
+  import PartyAnimal.UsersFixtures
 
   describe "events" do
-    alias PartyAnimal.Events.Event
-
-    import PartyAnimal.EventsFixtures
-
     @invalid_attrs %{name: nil, when: nil, desc: nil}
 
     test "list_events/0 returns all events" do
@@ -21,7 +21,8 @@ defmodule PartyAnimal.EventsTest do
     end
 
     test "create_event/1 with valid data creates a event" do
-      valid_attrs = %{name: "some name", when: ~U[2024-09-08 14:58:00Z], desc: "some desc"}
+      user = user_fixture()
+      valid_attrs = %{name: "some name", when: ~U[2024-09-08 14:58:00Z], desc: "some desc", user_id: user.id}
 
       assert {:ok, %Event{} = event} = Events.create_event(valid_attrs)
       assert event.name == "some name"
