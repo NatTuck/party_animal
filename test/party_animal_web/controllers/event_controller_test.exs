@@ -8,6 +8,8 @@ defmodule PartyAnimalWeb.EventControllerTest do
   @invalid_attrs %{name: nil, when: nil, desc: nil}
 
   describe "index" do
+    setup :register_and_log_in_user
+
     test "lists all events", %{conn: conn} do
       conn = get(conn, ~p"/events")
       assert html_response(conn, 200) =~ "Listing Events"
@@ -15,6 +17,8 @@ defmodule PartyAnimalWeb.EventControllerTest do
   end
 
   describe "new event" do
+    setup :register_and_log_in_user
+
     test "renders form", %{conn: conn} do
       conn = get(conn, ~p"/events/new")
       assert html_response(conn, 200) =~ "New Event"
@@ -22,6 +26,8 @@ defmodule PartyAnimalWeb.EventControllerTest do
   end
 
   describe "create event" do
+    setup :register_and_log_in_user
+
     test "redirects to show when data is valid", %{conn: conn} do
       conn = post(conn, ~p"/events", event: @create_attrs)
 
@@ -39,7 +45,7 @@ defmodule PartyAnimalWeb.EventControllerTest do
   end
 
   describe "edit event" do
-    setup [:create_event]
+    setup [:register_and_log_in_user, :create_event]
 
     test "renders form for editing chosen event", %{conn: conn, event: event} do
       conn = get(conn, ~p"/events/#{event}/edit")
@@ -48,7 +54,7 @@ defmodule PartyAnimalWeb.EventControllerTest do
   end
 
   describe "update event" do
-    setup [:create_event]
+    setup [:register_and_log_in_user, :create_event]
 
     test "redirects when data is valid", %{conn: conn, event: event} do
       conn = put(conn, ~p"/events/#{event}", event: @update_attrs)
@@ -65,7 +71,7 @@ defmodule PartyAnimalWeb.EventControllerTest do
   end
 
   describe "delete event" do
-    setup [:create_event]
+    setup [:register_and_log_in_user, :create_event]
 
     test "deletes chosen event", %{conn: conn, event: event} do
       conn = delete(conn, ~p"/events/#{event}")
@@ -77,8 +83,8 @@ defmodule PartyAnimalWeb.EventControllerTest do
     end
   end
 
-  defp create_event(_) do
-    event = event_fixture()
+  defp create_event(%{user: user}) do
+    event = event_fixture(user: user)
     %{event: event}
   end
 end
