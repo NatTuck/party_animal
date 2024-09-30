@@ -15,4 +15,10 @@
   <:item title="Owner"><%= @event.user.email %></:item>
 </.list>
 
+<%= if @event.image do %>
+  <img src={~p"/events/#{@event}/image"} />
+<% else %>
+  <p>No image</p>
+<% end %>
+
 <.back navigate={~p"/events"}>Back to events</.back>

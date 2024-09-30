@@ -61,4 +61,12 @@ defmodule PartyAnimalWeb.EventController do
     |> put_flash(:info, "Event deleted successfully.")
     |> redirect(to: ~p"/events")
   end
+
+  def image(conn, %{"id" => id}) do
+    event = Events.get_event!(id)
+
+    conn
+    |> put_resp_content_type("image/jpeg")
+    |> send_resp(200, event.image)
+  end
 end
