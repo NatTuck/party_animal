@@ -27,6 +27,7 @@ defmodule PartyAnimalWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     resources "/events", EventController
+    get "/events/:id/image", EventController, :image
   end
 
   # Other scopes may use custom stacks.
