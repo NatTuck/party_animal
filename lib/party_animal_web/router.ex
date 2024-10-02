@@ -13,6 +13,14 @@ defmodule PartyAnimalWeb.Router do
     plug :fetch_current_user
   end
 
+  pipeline :ajax do
+    plug :accepts, ["json"]
+    plug :fetch_session
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    plug :fetch_current_user
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -21,6 +29,7 @@ defmodule PartyAnimalWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    resources "/invites", InviteController
   end
 
   scope "/", PartyAnimalWeb do
@@ -28,6 +37,14 @@ defmodule PartyAnimalWeb.Router do
 
     resources "/events", EventController
     get "/events/:id/image", EventController, :image
+  end
+
+  scope "/ajax", PartyAnimalWeb.Ajax, as: :ajax do
+    pipe_through :ajax
+
+    resources "/invites", InviteController, except: [:new, :edit]
+    resources "/events", EventController, except: [:new, :edit]
+    resources "/users", UserController, except: [:new, :edit]
   end
 
   # Other scopes may use custom stacks.

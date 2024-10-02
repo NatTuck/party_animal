@@ -9,6 +9,9 @@ defmodule PartyAnimal.Users.User do
     field :current_password, :string, virtual: true, redact: true
     field :confirmed_at, :utc_datetime
 
+    has_many :events, PartyAnimal.Events.Event
+    has_many :invites, PartyAnimal.Invites.Invite
+
     timestamps(type: :utc_datetime)
   end
 

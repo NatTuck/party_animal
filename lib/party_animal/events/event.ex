@@ -1,5 +1,5 @@
 defmodule PartyAnimal.Events.Event do
-  alias __MODULE__
+  #alias __MODULE__
 
   use Ecto.Schema
   import Ecto.Changeset
@@ -10,6 +10,8 @@ defmodule PartyAnimal.Events.Event do
     field :desc, :string
     field :image, :binary
     belongs_to :user, PartyAnimal.Users.User   # user_id, :integer
+
+    has_many :invites, PartyAnimal.Invites.Invite
 
     timestamps(type: :utc_datetime)
   end
