@@ -4,12 +4,15 @@
 const plugin = require("tailwindcss/plugin")
 const fs = require("fs")
 const path = require("path")
+const flowbite = require("flowbite-react/tailwind");
 
 module.exports = {
   content: [
     "./js/**/*.js",
+    "./js/**/*.jsx",
     "../lib/party_animal_web.ex",
-    "../lib/party_animal_web/**/*.*ex"
+    "../lib/party_animal_web/**/*.*ex",
+    flowbite.content(),
   ],
   theme: {
     extend: {
@@ -29,6 +32,8 @@ module.exports = {
     plugin(({addVariant}) => addVariant("phx-click-loading", [".phx-click-loading&", ".phx-click-loading &"])),
     plugin(({addVariant}) => addVariant("phx-submit-loading", [".phx-submit-loading&", ".phx-submit-loading &"])),
     plugin(({addVariant}) => addVariant("phx-change-loading", [".phx-change-loading&", ".phx-change-loading &"])),
+
+    flowbite.plugin(),
 
     // Embeds Heroicons (https://heroicons.com) into your app.css bundle
     // See your `CoreComponents.icon/1` for more information.

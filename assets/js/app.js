@@ -42,3 +42,9 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
+
+
+import "./invites/main";
+
+
+
