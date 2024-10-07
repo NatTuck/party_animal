@@ -1,0 +1,17 @@
+<.header>
+  Invite <%= @invite.id %>
+  <:subtitle>This is a invite record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/invites/#{@invite}/edit"}>
+      <.button>Edit invite</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Response"><%= @invite.response %></:item>
+  <:item title="User"><%= @invite.user.email %></:item>
+  <:item title="Event"><%= @invite.event.name %></:item>
+</.list>
+
+<.back navigate={~p"/invites"}>Back to invites</.back>

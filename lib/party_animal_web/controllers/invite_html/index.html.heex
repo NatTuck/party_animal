@@ -1,0 +1,23 @@
+<.header>
+  Listing Invites
+  <:actions>
+    <.link href={~p"/invites/new"}>
+      <.button>New Invite</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="invites" rows={@invites} row_click={&JS.navigate(~p"/invites/#{&1}")}>
+  <:col :let={invite} label="Response"><%= invite.response %></:col>
+  <:action :let={invite}>
+    <div class="sr-only">
+      <.link navigate={~p"/invites/#{invite}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/invites/#{invite}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={invite}>
+    <.link href={~p"/invites/#{invite}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>
