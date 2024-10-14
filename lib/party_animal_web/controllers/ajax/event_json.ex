@@ -7,6 +7,9 @@ defmodule PartyAnimalWeb.Ajax.EventJSON do
   def index(%{events: events}) do
     %{data: for(event <- events, do: data(event))}
   end
+  def event_list(events) do
+    for(event <- events, do: data(event))
+  end
 
   @doc """
   Renders a single event.

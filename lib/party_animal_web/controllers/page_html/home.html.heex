@@ -15,5 +15,12 @@
   <div id="invites-main">
     React component loading...
   </div>
+
+  <script>
+    window.invite_form_data = {
+      users: <%= raw Jason.encode!(@users) %>,
+      events: <%= raw Jason.encode!(@events) %>,
+    };
+  </script>
   
 </div>

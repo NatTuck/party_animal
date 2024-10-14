@@ -13,6 +13,7 @@ defmodule PartyAnimalWeb.Ajax.InviteController do
 
   def create(conn, %{"invite" => invite_params}) do
     with {:ok, %Invite{} = invite} <- Invites.create_invite(invite_params) do
+      invite = Invites.get_invite!(invite.id)
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/ajax/invites/#{invite}")

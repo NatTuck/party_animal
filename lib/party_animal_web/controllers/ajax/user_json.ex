@@ -7,6 +7,9 @@ defmodule PartyAnimalWeb.Ajax.UserJSON do
   def index(%{users: users}) do
     %{data: for(user <- users, do: data(user))}
   end
+  def user_list(users) do
+    for(user <- users, do: data(user))
+  end
 
   @doc """
   Renders a single user.

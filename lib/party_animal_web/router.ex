@@ -29,6 +29,7 @@ defmodule PartyAnimalWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/hangman", PageController, :hangman
     resources "/invites", InviteController
   end
 
