@@ -2,14 +2,14 @@ defmodule PartyAnimalWeb.GameChannel do
   use PartyAnimalWeb, :channel
 
   alias PartyAnimal.Hangman.Game
+  alias PartyAnimal.Hangman.Server
+
 
   @impl true
   def join("game:lobby", payload, socket) do
     if authorized?(payload) do
-      game = Game.new()
-
-      socket = assign(socket, :game, game)
-      {:ok, %{view: Game.view(game)}, socket}
+      {:ok, view} = Server.peek()
+      {:ok, %{view: view}, socket}
     else
       {:error, %{reason: "unauthorized"}}
     end
@@ -19,15 +19,14 @@ defmodule PartyAnimalWeb.GameChannel do
   # by sending replies to requests from the client
   @impl true
   def handle_in("get_view", payload, socket) do
-    game = socket.assigns[:game]
-    {:reply, {:ok, %{view: Game.view(game)}}, socket}
+    {:ok, view} = Server.peek()
+    {:reply, {:ok, %{view: view}}, socket}
   end
 
   def handle_in("guess", %{"letter" => letter}, socket) do
-    game = socket.assigns[:game]
-    game = Game.guess(game, letter)
-    socket = assign(socket, :game, game)
-    {:reply, {:ok, %{view: Game.view(game)}}, socket}
+    {:ok, view} = Server.guess(letter)
+    broadcast(socket, "view", %{view: view})
+    {:reply, {:ok, %{view: view}}, socket}
   end
 
 

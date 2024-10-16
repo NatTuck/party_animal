@@ -25,6 +25,11 @@ function Game(props) {
         setView(view);
       })
       .receive("error", resp => { console.log("Unable to join", resp) });
+
+    channel.on("view", msg => {
+      let {view} = msg;
+      setView(view);
+    });
   }, []);
 
   function doGuess(ev) {

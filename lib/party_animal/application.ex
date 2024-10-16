@@ -20,7 +20,8 @@ defmodule PartyAnimal.Application do
       # Start a worker by calling: PartyAnimal.Worker.start_link(arg)
       # {PartyAnimal.Worker, arg},
       # Start to serve requests, typically the last entry
-      PartyAnimalWeb.Endpoint
+      PartyAnimalWeb.Endpoint,
+      PartyAnimal.Hangman.Server,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
