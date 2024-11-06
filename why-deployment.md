@@ -39,3 +39,14 @@ Handling secrets:
  - wx-widgets crash on start: remove :wx from apps in mix.exs
  - Enable server: need to set env
  - Need to set domain correctly in config/prod.exs
+
+
+Here's a sample prod-env.sh:
+
+```bash
+export MIX_ENV=prod
+export SECRET_KEY_BASE="2/178Wx7MYI...."
+export DATABASE_PATH=$HOME/db/party_animal_prod.db
+export PHX_SERVER=true
+export PHX_HOST=party.homework.quest
+```
