@@ -32,3 +32,10 @@ Handling secrets:
    with the same system packages (e.g. apt-get xxx) installed.
  - So your build system needs to be the same as your target server. That could be a docker container
    if you wanted to get clever.
+
+
+# Issues we hit
+
+ - wx-widgets crash on start: remove :wx from apps in mix.exs
+ - Enable server: need to set env
+ - Need to set domain correctly in config/prod.exs
